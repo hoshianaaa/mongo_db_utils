@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# 実行ログを出力する関数
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
+
+log "MongoDBサービスを停止します..."
+
+# MongoDBサービスを停止
+sudo systemctl stop mongod
+
+log "MongoDBの停止状態を確認します..."
+sudo systemctl status mongod | grep "Active:"
+
+log "MongoDBサービスが停止しました。"

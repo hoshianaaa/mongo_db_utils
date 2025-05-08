@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# 実行ログを出力する関数
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
+
+log "MongoDBインストールを開始します..."
+
+# MongoDBの公式GPGキーをインポート
+log "GPGキーをインポートしています..."
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+
+# リポジトリの追加
+log "リポジトリを追加しています..."
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+# パッケージリストの更新
+log "パッケージリストを更新しています..."
+sudo apt update
+
+# MongoDBのインストール
+log "MongoDBをインストールしています..."
+sudo apt install -y mongodb-org
+
+log "MongoDBのインストールが完了しました。"

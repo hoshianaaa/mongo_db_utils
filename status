@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# 実行ログを出力する関数
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
+
+log "MongoDBサービスのステータスを確認します..."
+
+# MongoDBのステータスを確認
+sudo systemctl status mongod
+
+log "MongoDBのバージョン情報:"
+mongod --version
+
+# データベースの接続情報を確認
+log "データベースの接続情報:"
+if systemctl is-active --quiet mongod; then
+    echo "接続先: localhost:27017"
+    echo "接続コマンド: mongosh"
+else
+    echo "MongoDBサービスが実行されていません。"
+fi

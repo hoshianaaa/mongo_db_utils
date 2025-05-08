@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# 実行ログを出力する関数
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
+
+log "MongoDBサービスを起動します..."
+
+# MongoDBサービスを開始
+sudo systemctl start mongod
+
+# システム起動時に自動的に起動するように設定
+log "MongoDBサービスを自動起動に設定します..."
+sudo systemctl enable mongod
+
+log "MongoDBの起動状態を確認します..."
+sudo systemctl status mongod | grep "Active:"
+
+log "MongoDBサービスが起動しました。接続するには mongosh コマンドを使用してください。"
